@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonText, IonList, IonItem, IonLabel, IonImg, IonSearchbar } from '@ionic/angular';
 import { MenuService } from '../../services/menu.service';
 import { Restaurant } from '../../models/restaurant.model';
+import { FormsModule } from '@angular/forms';
 
 // KATA · Dimecres 25/11 (consulta la fitxa de la sessió)
 //
@@ -17,7 +18,7 @@ import { Restaurant } from '../../models/restaurant.model';
 
 @Component({
   selector: 'app-home',
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonText, IonList, IonItem, IonLabel, IonImg, IonSearchbar],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonText, IonList, IonItem, IonLabel, IonImg, IonSearchbar,FormsModule],
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss',
 })
@@ -35,6 +36,13 @@ export class HomePage {
   loadRestaurants(): void {
     this.restaurants = this.menuService.getRestaurants();
   }
+
+  filteredRestaurants(): Restaurant[] {
+  return this.restaurants.filter(restaurant =>
+    restaurant.name.toLowerCase().includes(this.searchText.toLowerCase()) ||
+    restaurant.cuisine.toLowerCase().includes(this.searchText.toLowerCase())
+  );
+}
 
 
 

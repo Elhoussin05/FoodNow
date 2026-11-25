@@ -7,14 +7,12 @@
 <ion-content class="ion-padding">
   <h1>Restaurants a prop</h1>
 
-  <ion-searchbar
-    [(ngModel)]="searchText"
-    placeholder="Buscar restaurant">
+  <ion-searchbar [(ngModel)]="searchText" placeholder="Buscar restaurant per nom o cuina">
   </ion-searchbar>
 
   <ion-list class="ion-margin-top">
 
-     @for(restaurant of restaurants;track restaurant.id){
+     @for(restaurant of filteredRestaurants();track restaurant.id){
 
       <ion-item>
         <ion-label>
