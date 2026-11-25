@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonText } from '@ionic/angular';
+import { Component, inject } from '@angular/core';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonText, IonList, IonItem, IonLabel, IonImg, IonSearchbar } from '@ionic/angular';
+import { MenuService } from '../../services/menu.service';
+import { Restaurant } from '../../models/restaurant.model';
 
 // KATA · Dimecres 25/11 (consulta la fitxa de la sessió)
 //
@@ -15,8 +17,30 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonText } from '@ionic/ang
 
 @Component({
   selector: 'app-home',
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonText],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonText, IonList, IonItem, IonLabel, IonImg, IonSearchbar],
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss',
 })
-export class HomePage {}
+export class HomePage {
+
+  restaurants:Restaurant[]=[]
+  searchText: string = '';
+
+  menuService = inject(MenuService)
+
+  ngOnInit(): void {
+    this.loadRestaurants();
+  }
+
+  loadRestaurants(): void {
+    this.restaurants = this.menuService.getRestaurants();
+  }
+
+
+
+
+
+
+
+
+}
