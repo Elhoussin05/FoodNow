@@ -7,10 +7,11 @@
 <ion-content class="ion-padding">
   <h1>Restaurants a prop</h1>
 
-  <ion-searchbar [(ngModel)]="searchText" placeholder="Buscar restaurant per nom o cuina">
-  </ion-searchbar>
+  <ion-searchbar [(ngModel)]="searchText" placeholder="Buscar restaurant per nom o cuina"></ion-searchbar>
 
   <ion-list class="ion-margin-top">
+
+    @if(filteredRestaurants().length > 0) {
 
      @for(restaurant of filteredRestaurants();track restaurant.id){
 
@@ -22,17 +23,19 @@
         </ion-label>
 
       </ion-item>
-     }@empty{
+      }
+
+     }@else{
 
       <ion-text color="medium">
-          <p>Encara no hi ha cap restaurant a la llista.</p>
+          <p>No s'ha trobat cap restaurant que conicidixca.</p>
       </ion-text>
-
+      
      }
 
   </ion-list>
 
-  <h3>Numero de Restaurants : {{restaurants.length}}</h3>
+  <h3>Numero de Restaurants : {{filteredRestaurants().length}}</h3>
 
   <!-- KATA: ací van la cerca, el recompte, la llista i l'estat buit -->
   
